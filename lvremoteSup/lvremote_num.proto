@@ -1,26 +1,31 @@
+# changes '/' to '\' in paths to avoid excessive escape characters 
+path="%#/\//\\/";
+VARIABLES = "\$1,\$2" $path;
+LVGET ="LVGET " $VARIABLES "%l";
+LVPUT ="LVPUT " $VARIABLES;
 
 getDoubleVal {
-    out "LVGET \$1,\$2%l";
+    out $LVGET;
     in "%l%8R";
 }
 setDoubleVal {
-    out "LVPUT \$1,\$2,%8R%l";
+    out $LVPUT ",%8R%l";
 }
 
 getBoolVal {
-    out "LVGET \$1,\$2%l";
+    out $LVGET;
     in "%l%r"
 }
 setBoolVal {
-    out "LVPUT \$1,\$2,%r%l";
+    out $LVPUT ",%r%l";
 }
 
 getEnumVal {
-    out "LVGET \$1,\$2%l";
+    out $LVGET;
     in "%l%2r";
 }
 
 setEnumVal {
-    out "LVPUT \$1,\$2,%2r%l";
+    out $LVPUT ",%2r%l";
 }
 
