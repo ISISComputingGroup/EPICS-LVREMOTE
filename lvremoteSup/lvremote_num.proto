@@ -1,0 +1,26 @@
+
+getDoubleVal {
+    out "LVGET \$1,\$2%l";
+    in "%l%8R";
+}
+setDoubleVal {
+    out "LVPUT \$1,\$2,%8R%l";
+}
+
+getBoolVal {
+    out "LVGET \$1,\$2%l";
+    in "%l%r"
+}
+setBoolVal {
+    out "LVPUT \$1,\$2,%r%l";
+}
+
+getEnumVal {
+    out "LVGET \$1,\$2%l";
+    in "%l%2r";
+}
+
+setEnumVal {
+    out "LVPUT \$1,\$2,%2r%l";
+}
+

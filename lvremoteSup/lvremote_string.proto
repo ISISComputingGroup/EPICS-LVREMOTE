@@ -1,0 +1,10 @@
+Terminator = CR LF;
+
+sendString {
+    out "LVPUT \$1,\$2,%s";
+}
+getString {
+    out "LVGET \$1,\$2";
+    in "%#s";
+}
+
