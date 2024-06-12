@@ -1,6 +1,5 @@
 # Template file for remote labview services string values
 # Substitutions
-# DEVICE - The Device name
 # P - The PV prefix (This should usually be substituted for $(P))
 # NAME - The name of the pv
 # IND - The indicator of the value to read from labview
@@ -12,7 +11,7 @@
 # SCAN - Scan rate for the readback
 
 
-record(stringin, "$(P)$(DEVICE):$(NAME)") {
+record(stringin, "$(P)$(NAME)") {
     field(DESC, "Readback for $(DESCRIPTION)")
 $(IFNOTRECSIM)    field(DTYP, "stream")
 $(IFNOTRECSIM)    field(INP,  "@lvremote_string.proto getString($(VI),$(IND)) $(PORT)")
@@ -20,10 +19,10 @@ $(IFNOTRECSIM)    field(INP,  "@lvremote_string.proto getString($(VI),$(IND)) $(
 
     field(SDIS, "$(P)DISABLE")
     field(SIML, "$(P)SIM")
-    field(SIOL, "$(P)SIM:$(DEVICE):$(NAME) PP")
+    field(SIOL, "$(P)SIM:$(NAME) PP")
 }
 
-$(READONLY)record(stringout, "$(P)$(DEVICE):$(NAME):SP") {
+$(READONLY)record(stringout, "$(P)$(NAME):SP") {
 $(READONLY)    field(DESC, "Setpoint for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
 $(READONLY)$(IFNOTRECSIM)    field(OUT,  "@lvremote_string.proto sendString($(VI),$(CONTROL="")) $(PORT)")
@@ -31,10 +30,10 @@ $(READONLY)    field(SCAN, "Passive")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
 $(READONLY)    field(SIML, "$(P)SIM")
-$(READONLY)    field(SIOL, "$(P)SIM:$(DEVICE):$(NAME):SP PP")
+$(READONLY)    field(SIOL, "$(P)SIM:$(NAME):SP PP")
 $(READONLY)}
 
-$(READONLY)record(stringin, "$(P)$(DEVICE):$(NAME):SP:RBV") {
+$(READONLY)record(stringin, "$(P)$(NAME):SP:RBV") {
 $(READONLY)    field(DESC, "Setpoint Readback for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
 $(READONLY)$(IFNOTRECSIM)    field(INP,  "@lvremote_string.proto getString($(VI),$(CONTROL="")) $(PORT)")
@@ -42,15 +41,15 @@ $(READONLY)    field(SCAN, "$(SCAN)")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
 $(READONLY)    field(SIML, "$(P)SIM")
-$(READONLY)    field(SIOL, "$(P)SIM:$(DEVICE):$(NAME) PP")
+$(READONLY)    field(SIOL, "$(P)SIM:$(NAME) PP")
 $(READONLY)}
 
-record(bo, "$(P)SIM:$(DEVICE):$(NAME)") 
+record(bo, "$(P)SIM:$(NAME)") 
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
 }
 
-$(READONLY)alias("$(P)SIM:$(DEVICE):$(NAME)","$(P)SIM:$(DEVICE):$(NAME):SP")
+$(READONLY)alias("$(P)SIM:$(NAME)","$(P)SIM:$(NAME):SP")
 
 

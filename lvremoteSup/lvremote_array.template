@@ -1,6 +1,5 @@
 # Template file for remote labview services array values
 # Substitutions
-# DEVICE - The Device name
 # P - The PV prefix (This should usually be substituted for $(P))
 # NAME - The name of the pv
 # IND - The indicator of the value to read from labview
@@ -13,7 +12,7 @@
 # INDEX - The size of the array.
 
 
-record(waveform, "$(P)$(DEVICE):$(NAME)") {
+record(waveform, "$(P)$(NAME)") {
     field(DESC, "Readback for $(DESCRIPTION) array")
 $(IFNOTRECSIM)    field(DTYP, "stream")
 $(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getArrayVal($(VI),$(IND)) $(PORT)")
@@ -23,11 +22,11 @@ $(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getArrayVal($(VI),$(IND)) $(P
 
     field(SDIS, "$(P)DISABLE")
     field(SIML, "$(P)SIM")
-    field(SIOL, "$(P)SIM:$(DEVICE):$(NAME) PP")
+    field(SIOL, "$(P)SIM:$(NAME) PP")
 }
 
 
-record(waveform, "$(P)SIM:$(DEVICE):$(NAME)") 
+record(waveform, "$(P)SIM:$(NAME)") 
 {
     field(FTVL, "$(TYPE)")
     field(NELM, "$(INDEX)")

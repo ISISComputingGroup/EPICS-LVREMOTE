@@ -1,6 +1,5 @@
 # Template file for remote labview services binary values (e.g. buttons or LEDs)
 # Substitutions
-# DEVICE - The Device name
 # P - The PV prefix (This should usually be substituted for $(P))
 # NAME - The name of the pv
 # IND - The indicator of the value to read from labview
@@ -47,7 +46,7 @@
 # FFST - The 15 string
 ####################################
 
-record(mbbi, "$(P)$(DEVICE):$(NAME)") {
+record(mbbi, "$(P)$(NAME)") {
     field(DESC, "Readback for $(DESCRIPTION)")
 $(IFNOTRECSIM)    field(DTYP, "stream")
 $(IFNOTRECSIM)    field(INP,  "@lvremote_string.proto getString($(VI),$(IND)) $(PORT2)")
@@ -89,10 +88,10 @@ $(IFNOTRECSIM)    field(INP,  "@lvremote_string.proto getString($(VI),$(IND)) $(
 
     field(SDIS, "$(P)DISABLE")
     field(SIML, "$(P)SIM")
-    field(SIOL, "$(P)SIM:$(DEVICE):$(NAME) PP")
+    field(SIOL, "$(P)SIM:$(NAME) PP")
 }
 
-$(READONLY)record(mbbo, "$(P)$(DEVICE):$(NAME):SP") {
+$(READONLY)record(mbbo, "$(P)$(NAME):SP") {
 $(READONLY)    field(DESC, "Setpoint for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
 $(READONLY)$(IFNOTRECSIM)    field(OUT,  "@lvremote_num.proto setEnumVal($(VI),$(CONTROL="")) $(PORT)")
@@ -134,10 +133,10 @@ $(READONLY)    field(FFST, "$(FFST='')")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
 $(READONLY)    field(SIML, "$(P)SIM")
-$(READONLY)    field(SIOL, "$(P)SIM:$(DEVICE):$(NAME):SP PP")
+$(READONLY)    field(SIOL, "$(P)SIM:$(NAME):SP PP")
 $(READONLY)}
 
-$(READONLY)record(mbbi, "$(P)$(DEVICE):$(NAME):SP:RBV") {
+$(READONLY)record(mbbi, "$(P)$(NAME):SP:RBV") {
 $(READONLY)    field(DESC, "Setpoint Readback for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
 $(READONLY)$(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getEnumVal($(VI),$(CONTROL="")) $(PORT)")
@@ -179,10 +178,10 @@ $(READONLY)    field(FFST, "$(FFST='')")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
 $(READONLY)    field(SIML, "$(P)SIM")
-$(READONLY)    field(SIOL, "$(P)SIM:$(DEVICE):$(NAME) PP")
+$(READONLY)    field(SIOL, "$(P)SIM:$(NAME) PP")
 $(READONLY)}
 
-record(mbbo, "$(P)SIM:$(DEVICE):$(NAME)") 
+record(mbbo, "$(P)SIM:$(NAME)") 
 {
     field(ZRVL, "$(ZRVL=0)")
     field(ONVL, "$(ONVL=0)")
@@ -222,6 +221,6 @@ record(mbbo, "$(P)SIM:$(DEVICE):$(NAME)")
     field(DTYP, "Soft Channel")
 }
 
-$(READONLY)alias("$(P)SIM:$(DEVICE):$(NAME)","$(P)SIM:$(DEVICE):$(NAME):SP")
+$(READONLY)alias("$(P)SIM:$(NAME)","$(P)SIM:$(NAME):SP")
 
 

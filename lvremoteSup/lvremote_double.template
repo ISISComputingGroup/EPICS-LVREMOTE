@@ -1,6 +1,5 @@
 # Template file for remote labview services Double values (e.g. buttons or LEDs)
 # Substitutions
-# DEVICE - The Device name
 # P - The PV prefix (This should usually be substituted for $(P))
 # NAME - The name of the pv
 # IND - The indicator of the value to read from labview
@@ -15,7 +14,7 @@
 # SIMRECORD - Normally "", set to ":SP" if WRITEONLY = #.
 
 
-$(WRITEONLY)record(ai, "$(P)$(DEVICE):$(NAME)") {
+$(WRITEONLY)record(ai, "$(P)$(NAME)") {
 $(WRITEONLY)    field(DESC, "Readback for $(DESCRIPTION)")
 $(WRITEONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
 $(WRITEONLY)$(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getDoubleVal($(VI),$(IND)) $(PORT)")
@@ -23,10 +22,10 @@ $(WRITEONLY)    field(SCAN, "$(SCAN)")
 
 $(WRITEONLY)    field(SDIS, "$(P)DISABLE")
 $(WRITEONLY)    field(SIML, "$(P)SIM")
-$(WRITEONLY)    field(SIOL, "$(P)SIM:$(DEVICE):$(NAME)$(SIMRECORD="") PP")
+$(WRITEONLY)    field(SIOL, "$(P)SIM:$(NAME)$(SIMRECORD="") PP")
 $(WRITEONLY)}
 
-$(READONLY)record(ao, "$(P)$(DEVICE):$(NAME):SP") {
+$(READONLY)record(ao, "$(P)$(NAME):SP") {
 $(READONLY)    field(DESC, "Setpoint for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
 $(READONLY)$(IFNOTRECSIM)    field(OUT,  "@lvremote_num.proto setDoubleVal($(VI),$(CONTROL="")) $(PORT)")
@@ -34,10 +33,10 @@ $(READONLY)    field(SCAN, "Passive")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
 $(READONLY)    field(SIML, "$(P)SIM")
-$(READONLY)    field(SIOL, "$(P)SIM:$(DEVICE):$(NAME):SP PP")
+$(READONLY)    field(SIOL, "$(P)SIM:$(NAME):SP PP")
 $(READONLY)}
 
-$(READONLY)record(ai, "$(P)$(DEVICE):$(NAME):SP:RBV") {
+$(READONLY)record(ai, "$(P)$(NAME):SP:RBV") {
 $(READONLY)    field(DESC, "Setpoint Readback for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
 $(READONLY)$(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getDoubleVal($(VI),$(CONTROL="")) $(PORT)")
@@ -45,15 +44,15 @@ $(READONLY)    field(SCAN, "$(SCAN)")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
 $(READONLY)    field(SIML, "$(P)SIM")
-$(READONLY)    field(SIOL, "$(P)SIM:$(DEVICE):$(NAME)$(SIMRECORD="") PP")
+$(READONLY)    field(SIOL, "$(P)SIM:$(NAME)$(SIMRECORD="") PP")
 $(READONLY)}
 
-record(bo, "$(P)SIM:$(DEVICE):$(NAME)$(SIMRECORD="")") 
+record(bo, "$(P)SIM:$(NAME)$(SIMRECORD="")") 
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
 }
 
-$(READONLY)alias("$(P)SIM:$(DEVICE):$(NAME)$(SIMRECORD="")","$(P)SIM:$(DEVICE):$(NAME):SP")
+$(READONLY)alias("$(P)SIM:$(NAME)$(SIMRECORD="")","$(P)SIM:$(NAME):SP")
 
 

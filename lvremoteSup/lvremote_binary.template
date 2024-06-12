@@ -1,6 +1,5 @@
 # Template file for remote labview services binary values (e.g. buttons or LEDs)
 # Substitutions
-# DEVICE - The Device name
 # P - The PV prefix (This should usually be substituted for $(P))
 # NAME - The name of the pv
 # IND - The indicator of the value to read from labview
@@ -14,7 +13,7 @@
 # SCAN - Scan rate for the readback
 # HIGH - how long before it should reset to 0, 0 if it should not reset
 
-record(bi, "$(P)$(DEVICE):$(NAME)") {
+record(bi, "$(P)$(NAME)") {
     field(DESC, "Readback for $(DESCRIPTION)")
 $(IFNOTRECSIM)    field(DTYP, "stream")
 $(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getBoolVal($(VI),$(IND)) $(PORT)")
@@ -24,10 +23,10 @@ $(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getBoolVal($(VI),$(IND)) $(PO
 
     field(SDIS, "$(P)DISABLE")
     field(SIML, "$(P)SIM")
-    field(SIOL, "$(P)SIM:$(DEVICE):$(NAME) PP")
+    field(SIOL, "$(P)SIM:$(NAME) PP")
 }
 
-$(READONLY)record(bo, "$(P)$(DEVICE):$(NAME):SP") {
+$(READONLY)record(bo, "$(P)$(NAME):SP") {
 $(READONLY)    field(DESC, "Setpoint for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
 $(READONLY)$(IFNOTRECSIM)    field(OUT,  "@lvremote_num.proto setBoolVal($(VI),$(CONTROL="")) $(PORT)")
@@ -38,10 +37,10 @@ $(READONLY)    field(HIGH, "$(HIGH=0)")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
 $(READONLY)    field(SIML, "$(P)SIM")
-$(READONLY)    field(SIOL, "$(P)SIM:$(DEVICE):$(NAME):SP PP")
+$(READONLY)    field(SIOL, "$(P)SIM:$(NAME):SP PP")
 $(READONLY)}
 
-$(READONLY)record(bi, "$(P)$(DEVICE):$(NAME):SP:RBV") {
+$(READONLY)record(bi, "$(P)$(NAME):SP:RBV") {
 $(READONLY)    field(DESC, "Setpoint Readback for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
 $(READONLY)$(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getBoolVal($(VI),$(CONTROL="")) $(PORT)")
@@ -51,10 +50,10 @@ $(READONLY)    field(ONAM, "$(ONE)")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
 $(READONLY)    field(SIML, "$(P)SIM")
-$(READONLY)    field(SIOL, "$(P)SIM:$(DEVICE):$(NAME) PP")
+$(READONLY)    field(SIOL, "$(P)SIM:$(NAME) PP")
 $(READONLY)}
 
-record(bo, "$(P)SIM:$(DEVICE):$(NAME)") 
+record(bo, "$(P)SIM:$(NAME)") 
 {
     field(ZNAM, "$(ZERO)")
     field(ONAM, "$(ONE)")
@@ -63,6 +62,6 @@ record(bo, "$(P)SIM:$(DEVICE):$(NAME)")
     field(DTYP, "Soft Channel")
 }
 
-$(READONLY)alias("$(P)SIM:$(DEVICE):$(NAME)","$(P)SIM:$(DEVICE):$(NAME):SP")
+$(READONLY)alias("$(P)SIM:$(NAME)","$(P)SIM:$(NAME):SP")
 
 
