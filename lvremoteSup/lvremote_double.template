@@ -12,6 +12,7 @@
 # WRITEONLY - Whether or not a value should only be written to and have a setpoint readback, used by values that require some calculation for 
 # their input i.e. items split out of arrays, should be "#" when true and "" when false."
 # SIMRECORD - Normally "", set to ":SP" if WRITEONLY = #.
+# UNITS - The units to set the EGU field to.
 
 
 $(WRITEONLY)record(ai, "$(P)$(NAME)") {
@@ -19,6 +20,7 @@ $(WRITEONLY)    field(DESC, "Readback for $(DESCRIPTION)")
 $(WRITEONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
 $(WRITEONLY)$(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getDoubleVal($(VI),$(IND)) $(PORT)")
 $(WRITEONLY)    field(SCAN, "$(SCAN)")
+$(WRITEONLY)    field(EGU, "$(UNITS="")")
 
 $(WRITEONLY)    field(SDIS, "$(P)DISABLE")
 $(WRITEONLY)    field(SIML, "$(P)SIM")
@@ -30,6 +32,7 @@ $(READONLY)    field(DESC, "Setpoint for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
 $(READONLY)$(IFNOTRECSIM)    field(OUT,  "@lvremote_num.proto setDoubleVal($(VI),$(CONTROL="")) $(PORT)")
 $(READONLY)    field(SCAN, "Passive")
+$(READONLY)    field(EGU, "$(UNITS="")")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
 $(READONLY)    field(SIML, "$(P)SIM")
@@ -41,6 +44,7 @@ $(READONLY)    field(DESC, "Setpoint Readback for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
 $(READONLY)$(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getDoubleVal($(VI),$(CONTROL="")) $(PORT)")
 $(READONLY)    field(SCAN, "$(SCAN)")
+$(READONLY)    field(EGU, "$(UNITS="")")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
 $(READONLY)    field(SIML, "$(P)SIM")
