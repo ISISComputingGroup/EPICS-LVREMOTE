@@ -36,3 +36,14 @@ getArrayVal {
     out ${LVGET};
     in "%l%*4r%8R";
 }
+
+getIntVal {
+    out ${LVGET};
+    in "%l%4r";
+}
+
+setIntVal {
+    out ${LVPUT} ",%0.4r%l";
+    @init { getIntVal }
+}
+
