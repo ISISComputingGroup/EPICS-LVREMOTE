@@ -11,6 +11,7 @@ DATA += lvremote_double.template
 DATA += lvremote_enum.template
 DATA += lvremote_header.template
 DATA += lvremote_string.template
+DATA += lvremote_integer.template
 
 #=======================================
 
