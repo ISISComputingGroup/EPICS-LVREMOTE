@@ -1,17 +1,22 @@
 Terminator = CR LF;
 path="%#/\//\\/";
 
-ReadTimeout = 200;
+ReadTimeout = 20;
 WriteTimeout = 200;
 ReplyTimeout = 100;
-LockTimeout = 15000;
+LockTimeout = 5000;
 
 @replytimeout {
     disconnect;
-	wait 100;
 	connect 100;
-	wait 100;
-	out "*IDN? ";
+	out "*IDN?";
+	wait 5000;
+}
+
+@writetimeout {
+    disconnect;
+	connect 100;
+	out "*IDN?";
 	wait 5000;
 }
 
