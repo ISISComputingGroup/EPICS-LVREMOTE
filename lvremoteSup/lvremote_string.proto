@@ -6,20 +6,6 @@ WriteTimeout = 200;
 ReplyTimeout = 100;
 LockTimeout = 5000;
 
-@replytimeout {
-    disconnect;
-	connect 100;
-	out "*IDN?";
-	wait 5000;
-}
-
-@writetimeout {
-    disconnect;
-	connect 100;
-	out "*IDN?";
-	wait 5000;
-}
-
 getString {
     out "LVGET \${1}" ${path} ",\$2";
     in "%#s";

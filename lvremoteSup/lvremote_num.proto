@@ -9,18 +9,10 @@ WriteTimeout = 200;
 ReplyTimeout = 100;
 LockTimeout = 5000;
 
-@replytimeout {
-    disconnect;
-	connect 100;
-	out "*IDN?";
-	wait 5000;
-}
-
-@writetimeout {
-    disconnect;
-	connect 100;
-	out "*IDN?";
-	wait 5000;
+reconnect {
+    # This doesn't seem to work if sent directly via streamdevice port
+	# that autoreconnects. Send it via explicit NUMINIT port instead.
+    exec "asynOctetWrite(\"NUMINIT\" \"*IDN? \")";
 }
 
 getDoubleVal {
@@ -64,5 +56,15 @@ getIntVal {
 setIntVal {
     out ${LVPUT} ",%0.4r%l";
     @init { getIntVal }
+}
+
+getFloatVal {
+    out ${LVGET};
+    in "%l%4R";
+}
+
+setFloatVal {
+    out ${LVPUT} ",%4R%l";
+    @init { getFloatVal }
 }
 
