@@ -19,3 +19,19 @@ record(bo, "$(P)DISABLE")
     field(ONAM, "COMMS DISABLED")
     field(VAL,  "$(DISABLE=0)")
 }
+
+record(calcout, "$(P)_CHECK_CONNECTION") {
+    field(SCAN, "10 second")
+	# If not provided, defaults to DISABLE, which will not be in
+	# error and therefore never trigger the reconnect logic
+    field(INPA, "$(P)$(ERROR_CHECK_RECORD=DISABLE).SEVR")
+    field(CALC, "A=3")
+    field(OCAL, "1")
+    field(OOPT, "When Non-zero")
+    field(OUT, "$(P)REMAKE_CONNECTION.PROC PP")
+}
+
+record(bo, "$(P)REMAKE_CONNECTION") {
+    field(DTYP, "stream")
+    field(OUT, "@lvremote_num.proto reconnect L1")
+}
