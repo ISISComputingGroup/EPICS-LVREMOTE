@@ -18,8 +18,8 @@ record(bi, "$(P)$(NAME)") {
 $(IFNOTRECSIM)    field(DTYP, "stream")
 $(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getBoolVal($(VI),$(IND)) $(PORT)")
     field(SCAN, "$(SCAN)")
-    field(ZNAM, "$(ZERO)")
-    field(ONAM, "$(ONE)")
+    field(ZNAM, "$(ZERO=)")
+    field(ONAM, "$(ONE=)")
 
     field(SDIS, "$(P)DISABLE")
     field(SIML, "$(P)SIM")
@@ -31,8 +31,8 @@ $(READONLY)    field(DESC, "Setpoint for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
 $(READONLY)$(IFNOTRECSIM)    field(OUT,  "@lvremote_num.proto setBoolVal($(VI),$(CONTROL="")) $(PORT)")
 $(READONLY)    field(SCAN, "Passive")
-$(READONLY)    field(ZNAM, "$(ZERO)")
-$(READONLY)    field(ONAM, "$(ONE)")
+$(READONLY)    field(ZNAM, "$(ZERO=)")
+$(READONLY)    field(ONAM, "$(ONE=)")
 $(READONLY)    field(HIGH, "$(HIGH=0)")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
@@ -43,10 +43,10 @@ $(READONLY)}
 $(READONLY)record(bi, "$(P)$(NAME):SP:RBV") {
 $(READONLY)    field(DESC, "Setpoint Readback for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
-$(READONLY)$(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getBoolVal($(VI),$(CONTROL="")) $(PORT)")
+$(READONLY)$(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getBoolVal($(VI),$(CONTROL=)) $(PORT)")
 $(READONLY)    field(SCAN, "$(SCAN)")
-$(READONLY)    field(ZNAM, "$(ZERO)")
-$(READONLY)    field(ONAM, "$(ONE)")
+$(READONLY)    field(ZNAM, "$(ZERO=)")
+$(READONLY)    field(ONAM, "$(ONE=)")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
 $(READONLY)    field(SIML, "$(P)SIM")
@@ -55,8 +55,8 @@ $(READONLY)}
 
 record(bo, "$(P)SIM:$(NAME)") 
 {
-    field(ZNAM, "$(ZERO)")
-    field(ONAM, "$(ONE)")
+    field(ZNAM, "$(ZERO=)")
+    field(ONAM, "$(ONE=)")
     
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")

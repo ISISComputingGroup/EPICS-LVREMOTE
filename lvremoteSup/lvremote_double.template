@@ -20,19 +20,19 @@ $(WRITEONLY)    field(DESC, "Readback for $(DESCRIPTION)")
 $(WRITEONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
 $(WRITEONLY)$(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getDoubleVal($(VI),$(IND)) $(PORT)")
 $(WRITEONLY)    field(SCAN, "$(SCAN)")
-$(WRITEONLY)    field(EGU, "$(UNITS="")")
+$(WRITEONLY)    field(EGU, "$(UNITS=)")
 
 $(WRITEONLY)    field(SDIS, "$(P)DISABLE")
 $(WRITEONLY)    field(SIML, "$(P)SIM")
-$(WRITEONLY)    field(SIOL, "$(P)SIM:$(NAME)$(SIMRECORD="") PP")
+$(WRITEONLY)    field(SIOL, "$(P)SIM:$(NAME)$(SIMRECORD=) PP")
 $(WRITEONLY)}
 
 $(READONLY)record(ao, "$(P)$(NAME):SP") {
 $(READONLY)    field(DESC, "Setpoint for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
-$(READONLY)$(IFNOTRECSIM)    field(OUT,  "@lvremote_num.proto setDoubleVal($(VI),$(CONTROL="")) $(PORT)")
+$(READONLY)$(IFNOTRECSIM)    field(OUT,  "@lvremote_num.proto setDoubleVal($(VI),$(CONTROL=)) $(PORT)")
 $(READONLY)    field(SCAN, "Passive")
-$(READONLY)    field(EGU, "$(UNITS="")")
+$(READONLY)    field(EGU, "$(UNITS=)")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
 $(READONLY)    field(SIML, "$(P)SIM")
@@ -42,21 +42,21 @@ $(READONLY)}
 $(READONLY)record(ai, "$(P)$(NAME):SP:RBV") {
 $(READONLY)    field(DESC, "Setpoint Readback for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
-$(READONLY)$(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getDoubleVal($(VI),$(CONTROL="")) $(PORT)")
+$(READONLY)$(IFNOTRECSIM)    field(INP,  "@lvremote_num.proto getDoubleVal($(VI),$(CONTROL=)) $(PORT)")
 $(READONLY)    field(SCAN, "$(SCAN)")
-$(READONLY)    field(EGU, "$(UNITS="")")
+$(READONLY)    field(EGU, "$(UNITS=)")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
 $(READONLY)    field(SIML, "$(P)SIM")
-$(READONLY)    field(SIOL, "$(P)SIM:$(NAME)$(SIMRECORD="") PP")
+$(READONLY)    field(SIOL, "$(P)SIM:$(NAME)$(SIMRECORD=) PP")
 $(READONLY)}
 
-record(bo, "$(P)SIM:$(NAME)$(SIMRECORD="")") 
+record(ao, "$(P)SIM:$(NAME)$(SIMRECORD=)") 
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
 }
 
-$(READONLY)alias("$(P)SIM:$(NAME)$(SIMRECORD="")","$(P)SIM:$(NAME):SP")
+$(READONLY)alias("$(P)SIM:$(NAME)$(SIMRECORD=)","$(P)SIM:$(NAME):SP")
 
 
