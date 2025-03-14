@@ -25,7 +25,7 @@ $(IFNOTRECSIM)    field(INP,  "@lvremote_string.proto getString($(VI),$(IND)) $(
 $(READONLY)record(stringout, "$(P)$(NAME):SP") {
 $(READONLY)    field(DESC, "Setpoint for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
-$(READONLY)$(IFNOTRECSIM)    field(OUT,  "@lvremote_string.proto sendString($(VI),$(CONTROL="")) $(PORT)")
+$(READONLY)$(IFNOTRECSIM)    field(OUT,  "@lvremote_string.proto sendString($(VI),$(CONTROL=)) $(PORT)")
 $(READONLY)    field(SCAN, "Passive")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
@@ -36,7 +36,7 @@ $(READONLY)}
 $(READONLY)record(stringin, "$(P)$(NAME):SP:RBV") {
 $(READONLY)    field(DESC, "Setpoint Readback for $(DESCRIPTION)")
 $(READONLY)$(IFNOTRECSIM)    field(DTYP, "stream")
-$(READONLY)$(IFNOTRECSIM)    field(INP,  "@lvremote_string.proto getString($(VI),$(CONTROL="")) $(PORT)")
+$(READONLY)$(IFNOTRECSIM)    field(INP,  "@lvremote_string.proto getString($(VI),$(CONTROL=)) $(PORT)")
 $(READONLY)    field(SCAN, "$(SCAN)")
 
 $(READONLY)    field(SDIS, "$(P)DISABLE")
@@ -44,7 +44,7 @@ $(READONLY)    field(SIML, "$(P)SIM")
 $(READONLY)    field(SIOL, "$(P)SIM:$(NAME) PP")
 $(READONLY)}
 
-record(bo, "$(P)SIM:$(NAME)") 
+record(stringout, "$(P)SIM:$(NAME)") 
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
